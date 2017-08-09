@@ -40,11 +40,26 @@ public class Post {
         return found;
     }
 
+    public static void deletePosts(int id) {
+        for (Post thisPost: instances) {
+            if (thisPost.id == id)
+                instances.remove(thisPost);
+        }
+    }
+
+    public static void clearAllPosts(){
+        instances.clear();
+    }
+
+
+
+
     //Setters
     public static void setPostSize(int postSize) {
         Post.postSize = postSize;
     }
 
+    //Getters
     public String getContent() {
         return content;
     }
@@ -57,16 +72,6 @@ public class Post {
         return instances;
     }
 
-    public static void clearAllPosts(){
-        instances.clear();
-    }
-
-    public static void deletePosts(int id) {
-        for (Post thisPost: instances) {
-            if (thisPost.id == id)
-                instances.remove(thisPost);
-        }
-    }
 
     public boolean getPublished(){ //new too
         return this.published;

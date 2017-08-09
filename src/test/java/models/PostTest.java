@@ -16,6 +16,9 @@ public class PostTest {
 
     @After
     public void tearDown() throws Exception {
+        // Remember, the test will fail without these lines! We need to empty leftover Posts from previous tests!
+        Post.clearAllPosts();
+        Post.setPostSize(0);
     }
 
     @Test
@@ -44,7 +47,6 @@ public class PostTest {
 
     @Test
     public void getId_postsInstantiateWithAnID_1() throws Exception{
-        Post.clearAllPosts();  // Remember, the test will fail without this line! We need to empty leftover Posts from previous tests!
         Post myPost = newPost();
         Post otherPost = new Post("How to pair successfully");
         assertEquals(2, otherPost.getId());
@@ -52,34 +54,28 @@ public class PostTest {
 
     @Test
     public void findReturnsCorrectPost() throws Exception {
-        Post.clearAllPosts();
-        Post.setPostSize(0);
         Post myPost = newPost();
         assertEquals(myPost, Post.findById(1));
     }
 
     @Test
     public void findReturnsCorrectPostWhenMoreThanOnePostExists() throws Exception {
-        Post.clearAllPosts();
-        Post.setPostSize(0);
         Post post = newPost();
         Post otherPost = new Post("How to pair successfully");
         assertEquals(otherPost, Post.findById(2));
     }
+
     @Test
     public void testIDIncrementFunction() throws Exception {
-        Post.clearAllPosts();
-        Post.setPostSize(0);
         Post post = newPost();
         Post otherPost = new Post("How to pair successfully");
         Post anotherPost = new Post("hey guys");
         Post fourthPost = new Post("4th post");
         assertEquals(4, fourthPost.getId());
     }
+
     @Test
     public void testDeletePostFunction1() throws Exception {
-        Post.clearAllPosts();
-        Post.setPostSize(0);
         Post post = newPost();
         Post otherPost = new Post("How to pair successfully");
         Post anotherPost = new Post("hey guys");
@@ -87,10 +83,9 @@ public class PostTest {
         Post.deletePosts(3);
         assertEquals(3, Post.getAll().size());
     }
+
     @Test
     public void testDeletePostFunction2() throws Exception {
-        Post.clearAllPosts();
-        Post.setPostSize(0);
         Post post = newPost();
         Post otherPost = new Post("How to pair successfully");
         Post anotherPost = new Post("hey guys");
@@ -99,10 +94,9 @@ public class PostTest {
         Post fifthPost = new Post("5th post");
         assertEquals(5, fifthPost.getId());
     }
+
     @Test
     public void testDeletePostContains() throws Exception {
-        Post.clearAllPosts();
-        Post.setPostSize(0); 
         Post post = newPost();
         Post otherPost = new Post("How to pair successfully");
         Post anotherPost = new Post("hey guys");
