@@ -20,7 +20,7 @@ public class App {
 
         get("/posts/new", (request, response) -> { //URL to make new post on POST route
             Map<String, Object> model = new HashMap<>();
-            return new ModelAndView(model, "newpost-form.hbs");
+            return new ModelAndView(model, "post-form.hbs");
         }, new HandlebarsTemplateEngine());
 
         post("/posts/new", (request,response)-> {
@@ -32,18 +32,30 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         get("/posts/:id/delete", (request,response)-> {
-//            Map<String, Object> model = new HashMap<String, Object>();
-            System.out.println("size: " + Post.getAll().size());
             int idOfPostToDelete = Integer.parseInt(request.params("id")); //pull id - must match route segment
             Post.deletePosts(idOfPostToDelete);
-            System.out.println("size: " + Post.getAll().size());
-            System.out.println(Post.getAll());
             response.redirect("/");
             return null;
         });
 
-//            return new ModelAndView(model, "success.hbs");
-//        }, new HandlebarsTemplateEngine());
+        get("/posts/:id/edit", (request,response)-> {
+            Map<String, Object> model = new HashMap<>();
+            String newContent = request.queryParams("content");
+            int idOfPostToEdit = Integer.parseInt(request.params("id"));
+            Post editPost = Post.findById(idOfPostToEdit);
+            editPost.update(newContent);
+            model.put("editPost", editPost);
+            return new ModelAndView(model, "post-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/posts/:id/edit", (request, response) -> { //URL to make new post on POST route
+            Map<String, Object> model = new HashMap<>();
+            String newContent = request.queryParams("content");
+            int idOfPostToEdit = Integer.parseInt(request.params("id"));
+            Post editPost = Post.findById(idOfPostToEdit);
+            editPost.update(newContent);
+            return new ModelAndView(model, "success.hbs");
+        }, new HandlebarsTemplateEngine());
 
         get("/posts/:id", (request, response) -> {
             Map<String, Object> model = new HashMap<>();

@@ -105,4 +105,11 @@ public class PostTest {
         Post fifthPost = new Post("5th post");
         assertFalse(Post.getAll().contains(anotherPost));
     }
+
+    @Test
+    public void name() throws Exception {
+        Post post = newPost();
+        post.update("this is an edit");
+        assertEquals("this is an edit", post.getContent());
+    }
 }

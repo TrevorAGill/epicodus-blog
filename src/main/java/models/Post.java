@@ -55,6 +55,10 @@ public class Post {
         instances.clear();
     }
 
+    public void update(String edit){
+        this.content = edit;
+    }
+
 
 
 
