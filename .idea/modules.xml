@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/epicodus-blog.iml" filepath="$PROJECT_DIR$/epicodus-blog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/epicodus-blog_main.iml" filepath="$PROJECT_DIR$/.idea/modules/epicodus-blog_main.iml" group="epicodus-blog" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/epicodus-blog_test.iml" filepath="$PROJECT_DIR$/.idea/modules/epicodus-blog_test.iml" group="epicodus-blog" />
+    </modules>
+  </component>
+</project>

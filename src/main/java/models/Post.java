@@ -1,5 +1,6 @@
 package models;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -48,7 +49,7 @@ public class Post {
         return this.published;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public String getCreatedAt() {
+        return createdAt.getDayOfWeek().toString().toLowerCase();
     }
 }

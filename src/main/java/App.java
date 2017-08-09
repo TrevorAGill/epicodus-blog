@@ -18,14 +18,6 @@ public class App {
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
-//        get("/posts/:id", (request, response) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            int idOfPostToFind = Integer.parseInt(request.params("id"));
-//            Post foundPost = Post.findById(idOfPostToFind);
-//            model.put("post", foundPost);
-//            return new ModelAndView(model, "post-detail.hbs");
-//        }, new HandlebarsTemplateEngine());
-
         get("/posts/new", (request, response) -> { //URL to make new post on POST route
             Map<String, Object> model = new HashMap<>();
             return new ModelAndView(model, "newpost-form.hbs");
@@ -33,10 +25,18 @@ public class App {
 
         post("/posts/new", (request,response)-> {
             Map<String, Object> model = new HashMap<String, Object>();
-            String name = request.queryParams("name");
+            String name = request.queryParams("content");
             Post newPost = new Post(name);
             model.put("post", newPost);
             return new ModelAndView(model, "success.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/posts/:id", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfPostToFind = Integer.parseInt(request.params("id"));
+            Post foundPost = Post.findById(idOfPostToFind);
+            model.put("post", foundPost);
+            return new ModelAndView(model, "post-detail.hbs");
         }, new HandlebarsTemplateEngine());
     }
 }
