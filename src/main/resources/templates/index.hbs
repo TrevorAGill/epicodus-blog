@@ -6,6 +6,7 @@
         {{#each posts }}
             <p>Current post: </p>
             <p>{{ content }}<a href="/posts/{{id}}">: read more...</a></p>
+            <a href="/posts/{{id}}/delete"><button class="btn btn-info">Remove Post</button></a>
         {{/each}}
     {{else}}
         <p>No posts!</p>

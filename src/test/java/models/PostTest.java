@@ -36,31 +36,79 @@ public class PostTest {
         assertEquals(false, myPost.getPublished()); //should never start as published
     }
 
-    @Test
-    public void getCreatedAt_instantiatesWithCurrentTime_today() throws Exception {
-        Post myPost = newPost();
-        assertEquals(LocalDateTime.now().getDayOfWeek(),myPost.getCreatedAt().getDayOfWeek());
-    }
+//    @Test
+//    public void getCreatedAt_instantiatesWithCurrentTime_today() throws Exception {
+//        Post myPost = newPost();
+//        assertEquals(LocalDateTime.now().getDayOfWeek(),myPost.getCreatedAt().getDayOfWeek());
+//    }
 
     @Test
     public void getId_postsInstantiateWithAnID_1() throws Exception{
         Post.clearAllPosts();  // Remember, the test will fail without this line! We need to empty leftover Posts from previous tests!
         Post myPost = newPost();
-        assertEquals(1, myPost.getId());
+        Post otherPost = new Post("How to pair successfully");
+        assertEquals(2, otherPost.getId());
     }
 
     @Test
     public void findReturnsCorrectPost() throws Exception {
         Post.clearAllPosts();
+        Post.setPostSize(0);
         Post myPost = newPost();
-        assertEquals(1, Post.findById(myPost.getId()).getId());
+        assertEquals(myPost, Post.findById(1));
     }
 
     @Test
     public void findReturnsCorrectPostWhenMoreThanOnePostExists() throws Exception {
         Post.clearAllPosts();
+        Post.setPostSize(0);
         Post post = newPost();
         Post otherPost = new Post("How to pair successfully");
-        assertEquals(2, Post.findById(otherPost.getId()).getId());
+        assertEquals(otherPost, Post.findById(2));
+    }
+    @Test
+    public void testIDIncrementFunction() throws Exception {
+        Post.clearAllPosts();
+        Post.setPostSize(0);
+        Post post = newPost();
+        Post otherPost = new Post("How to pair successfully");
+        Post anotherPost = new Post("hey guys");
+        Post fourthPost = new Post("4th post");
+        assertEquals(4, fourthPost.getId());
+    }
+    @Test
+    public void testDeletePostFunction1() throws Exception {
+        Post.clearAllPosts();
+        Post.setPostSize(0);
+        Post post = newPost();
+        Post otherPost = new Post("How to pair successfully");
+        Post anotherPost = new Post("hey guys");
+        Post fourthPost = new Post("4th post");
+        Post.deletePosts(3);
+        assertEquals(3, Post.getAll().size());
+    }
+    @Test
+    public void testDeletePostFunction2() throws Exception {
+        Post.clearAllPosts();
+        Post.setPostSize(0);
+        Post post = newPost();
+        Post otherPost = new Post("How to pair successfully");
+        Post anotherPost = new Post("hey guys");
+        Post fourthPost = new Post("4th post");
+        Post.deletePosts(3);
+        Post fifthPost = new Post("5th post");
+        assertEquals(5, fifthPost.getId());
+    }
+    @Test
+    public void testDeletePostContains() throws Exception {
+        Post.clearAllPosts();
+        Post.setPostSize(0); 
+        Post post = newPost();
+        Post otherPost = new Post("How to pair successfully");
+        Post anotherPost = new Post("hey guys");
+        Post fourthPost = new Post("4th post");
+        Post.deletePosts(3);
+        Post fifthPost = new Post("5th post");
+        assertFalse(Post.getAll().contains(anotherPost));
     }
 }

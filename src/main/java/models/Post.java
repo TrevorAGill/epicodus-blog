@@ -11,15 +11,18 @@ public class Post {
     private LocalDateTime createdAt;
 
     private int id;
-    private int postSize = 0;
+
+
+
+    private static int postSize;
 
     public Post (String content){
-        this.content = content;
-        this.published = false;
-        this.createdAt = LocalDateTime.now();
-        instances.add(this);
-        this.postSize++;
-        this.id = postSize;
+            this.content = content;
+            this.published = false;
+            this.createdAt = LocalDateTime.now();
+            instances.add(this);
+            this.postSize++;
+            this.id = postSize;
     }
 
     //method to use use constructor to create a new post in order to DRY test code
@@ -29,7 +32,17 @@ public class Post {
     }
 
     public static Post findById(int id){
-        return instances.get(id-1);
+        Post found = null;
+        for (Post thisPost: instances) {
+            if (thisPost.id == id)
+                found = thisPost;
+        }
+        return found;
+    }
+
+    //Setters
+    public static void setPostSize(int postSize) {
+        Post.postSize = postSize;
     }
 
     public String getContent() {
@@ -37,7 +50,7 @@ public class Post {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public static ArrayList<Post> getAll(){
@@ -49,11 +62,9 @@ public class Post {
     }
 
     public static void deletePosts(int id) {
-        //remove post at it's ID
-        instances.remove(id -1);
-        //loop through and change IDto new indexed position + 1
         for (Post thisPost: instances) {
-            thisPost.id = instances.indexOf(thisPost) + 1;
+            if (thisPost.id == id)
+                instances.remove(thisPost);
         }
     }
 
