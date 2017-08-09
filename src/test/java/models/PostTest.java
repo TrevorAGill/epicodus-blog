@@ -46,7 +46,7 @@ public class PostTest {
 //    }
 
     @Test
-    public void getId_postsInstantiateWithAnID_1() throws Exception{
+    public void getId_postsInstantiateWithAnID_1() throws Exception {
         Post myPost = newPost();
         Post otherPost = new Post("How to pair successfully");
         assertEquals(2, otherPost.getId());
@@ -107,9 +107,20 @@ public class PostTest {
     }
 
     @Test
-    public void name() throws Exception {
+    public void testUpdateMethod() throws Exception {
         Post post = newPost();
         post.update("this is an edit");
         assertEquals("this is an edit", post.getContent());
+    }
+
+    @Test
+    public void testUpdateMethodOnMultiplePosts() throws Exception {
+        Post post = newPost();
+        Post otherPost = new Post("How to pair successfully");
+        Post anotherPost = new Post("hey guys");
+        Post fourthPost = new Post("4th post");
+        Post found = Post.findById(3);
+        found.update("edited post");
+        assertEquals("edited postzz", found.getContent());
     }
 }
