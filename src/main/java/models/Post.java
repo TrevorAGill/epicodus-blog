@@ -40,14 +40,12 @@ public class Post {
     }
 
     public static void deletePosts(int id) {
-
         try {
             for (Post thisPost : instances) {
                 if (thisPost.id == id)
                     instances.remove(thisPost);
             }
         }
-
         catch (ConcurrentModificationException ex){
             ex.printStackTrace();
         }

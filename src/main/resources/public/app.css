@@ -1,0 +1,13 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  background: url("/images/background.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  color: white;
+  text-align: center;
+}
