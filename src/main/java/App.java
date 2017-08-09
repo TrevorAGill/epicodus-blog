@@ -32,15 +32,18 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         get("/posts/:id/delete", (request,response)-> {
-            Map<String, Object> model = new HashMap<String, Object>();
+//            Map<String, Object> model = new HashMap<String, Object>();
             System.out.println("size: " + Post.getAll().size());
-            System.out.println(Post.getAll());
             int idOfPostToDelete = Integer.parseInt(request.params("id")); //pull id - must match route segment
             Post.deletePosts(idOfPostToDelete);
-//            response.redirect("/");
-//            return null;
-            return new ModelAndView(model, "success.hbs");
-        }, new HandlebarsTemplateEngine());
+            System.out.println("size: " + Post.getAll().size());
+            System.out.println(Post.getAll());
+            response.redirect("/");
+            return null;
+        });
+
+//            return new ModelAndView(model, "success.hbs");
+//        }, new HandlebarsTemplateEngine());
 
         get("/posts/:id", (request, response) -> {
             Map<String, Object> model = new HashMap<>();

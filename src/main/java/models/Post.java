@@ -1,8 +1,10 @@
 package models;
 
+import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 public class Post {
     private String content;
@@ -11,9 +13,6 @@ public class Post {
     private LocalDateTime createdAt;
 
     private int id;
-
-
-
     private static int postSize;
 
     public Post (String content){
@@ -41,9 +40,16 @@ public class Post {
     }
 
     public static void deletePosts(int id) {
-        for (Post thisPost: instances) {
-            if (thisPost.id == id)
-                instances.remove(thisPost);
+
+        try {
+            for (Post thisPost : instances) {
+                if (thisPost.id == id)
+                    instances.remove(thisPost);
+            }
+        }
+
+        catch (ConcurrentModificationException ex){
+            ex.printStackTrace();
         }
     }
 
