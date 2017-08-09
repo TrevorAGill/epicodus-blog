@@ -121,6 +121,6 @@ public class PostTest {
         Post fourthPost = new Post("4th post");
         Post found = Post.findById(3);
         found.update("edited post");
-        assertEquals("edited postzz", found.getContent());
+        assertEquals("edited post", found.getContent());
     }
 }
