@@ -9,14 +9,17 @@ public class Post {
     private static ArrayList<Post> instances = new ArrayList<>();
     private boolean published;
     private LocalDateTime createdAt;
+
     private int id;
+    private int postSize = 0;
 
     public Post (String content){
         this.content = content;
         this.published = false;
         this.createdAt = LocalDateTime.now();
         instances.add(this);
-        this.id = instances.size();
+        this.postSize++;
+        this.id = postSize;
     }
 
     //method to use use constructor to create a new post in order to DRY test code
@@ -43,6 +46,15 @@ public class Post {
 
     public static void clearAllPosts(){
         instances.clear();
+    }
+
+    public static void deletePosts(int id) {
+        //remove post at it's ID
+        instances.remove(id -1);
+        //loop through and change IDto new indexed position + 1
+        for (Post thisPost: instances) {
+            thisPost.id = instances.indexOf(thisPost) + 1;
+        }
     }
 
     public boolean getPublished(){ //new too
